@@ -83,7 +83,7 @@ for i in range(10):
         "| Original:", y_train[i],
         "| Encoded:", y_train_encoded[i]
     )
-    
+
 #converting tokenized labels to pytorch datasets
 import torch
 from torch.utils.data import Dataset
@@ -123,3 +123,129 @@ print("Test dataset size:", len(test_dataset))
 
 print("\nFirst training example:")
 print(train_dataset[0])
+
+
+#DataLoader
+from torch.utils.data import DataLoader
+
+train_loader = DataLoader(
+    train_dataset,
+    batch_size=16,
+    shuffle=True
+)
+
+test_loader = DataLoader(
+    test_dataset,
+    batch_size=16,
+    shuffle=False
+)
+
+print("Number of training batches:", len(train_loader))
+print("Number of test batches:", len(test_loader))
+
+#let's actually look at one batch
+batch = next(iter(train_loader))
+
+print("Batch keys:", batch.keys())
+print("Input IDs shape:", batch["input_ids"].shape)
+print("Attention mask shape:", batch["attention_mask"].shape)
+print("Labels shape:", batch["labels"].shape)
+
+print("\nLabels in this batch:")
+print(batch["labels"])
+
+#send one batch into DistilBERT before training.
+# Take one batch
+batch = next(iter(train_loader))
+
+# Send the batch to DistilBERT
+outputs = model(
+    input_ids=batch["input_ids"],
+    attention_mask=batch["attention_mask"],
+    labels=batch["labels"]
+)
+
+print("Logits shape:", outputs.logits.shape)
+print("Loss:", outputs.loss)
+
+#Before training, let's inspect one sentence's 77 logits and see how the model chooses its current prediction.
+
+print("First example logits:")
+print(outputs.logits[0])
+
+predicted_class = torch.argmax(outputs.logits[0]).item()
+
+print("\nPredicted class:", predicted_class)
+print("Actual class:", batch["labels"][0])
+print("Predicted intent:", label_encoder.inverse_transform([predicted_class])[0])
+print("Actual intent:", label_encoder.inverse_transform([batch["labels"][0].item()])[0])
+
+
+#train one batch using optimiser
+from torch.optim import AdamW
+
+optimizer = AdamW(
+    model.parameters(),
+    lr=5e-5
+)
+#check for 2 epochs
+num_epochs = 2
+
+for epoch in range(num_epochs):
+
+    model.train()
+    total_loss = 0
+
+    for batch in train_loader:
+
+        optimizer.zero_grad()
+
+        outputs = model(
+            input_ids=batch["input_ids"],
+            attention_mask=batch["attention_mask"],
+            labels=batch["labels"]
+        )
+
+        loss = outputs.loss
+
+        loss.backward()
+
+        optimizer.step()
+
+        total_loss += loss.item()
+
+    avg_loss = total_loss / len(train_loader)
+
+    print(f"Epoch {epoch + 1}/{num_epochs} - Loss: {avg_loss:.4f}")
+from sklearn.metrics import accuracy_score, classification_report
+
+model.eval()
+
+all_predictions = []
+all_labels = []
+
+with torch.no_grad():
+
+    for batch in test_loader:
+
+        outputs = model(
+            input_ids=batch["input_ids"],
+            attention_mask=batch["attention_mask"]
+        )
+
+        predictions = torch.argmax(outputs.logits, dim=1)
+
+        all_predictions.extend(predictions.cpu().numpy())
+        all_labels.extend(batch["labels"].cpu().numpy())
+
+accuracy = accuracy_score(all_labels, all_predictions)
+
+print("DistilBERT Accuracy:", accuracy)
+
+print(
+    classification_report(
+        all_labels,
+        all_predictions,
+        target_names=label_encoder.classes_
+    )
+)
