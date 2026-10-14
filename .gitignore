@@ -2,3 +2,5 @@
 __pycache__/
 .env
 *.pyc
+models/
+chroma_db/
