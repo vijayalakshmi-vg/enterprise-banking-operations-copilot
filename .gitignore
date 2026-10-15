@@ -4,3 +4,15 @@ __pycache__/
 *.pyc
 models/
 chroma_db/
+
+
+# Virtual environments
+.venv*/
+venv/
+
+# ChromaDB test databases and backups
+chroma_db*/
+chroma_test_db/
+
+# Temporary environment snapshots
+freeze_*.txt
