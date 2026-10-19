@@ -1,6 +1,6 @@
-FAQ 1: Pending Cash Withdrawal
+FAQ 1: Failed or Pending ATM Cash Withdrawal
 
-If an ATM cash withdrawal is pending, allow up to three business days for processing. If the amount has not been credited or reversed after this period, contact the bank's support team with the transaction date and reference number.
+If an ATM does not dispense cash but your account is charged, or your cash withdrawal remains pending, the transaction may need time to process or reverse. Allow up to three business days for processing. If the amount has not been credited or reversed after this period, contact the bank's support team with the transaction date and reference number.
 
 FAQ 2: Card Declined
 
@@ -14,6 +14,6 @@ FAQ 4: International Transaction Fees
 
 International card transactions may incur foreign transaction fees or currency conversion charges depending on the bank's terms and the card product. Check the applicable fee schedule for the specific card.
 
-FAQ 5: Unrecognized Cash Withdrawal
+FAQ 5: Unrecognized or Unauthorized Cash Withdrawal
 
-If a cash withdrawal appears on your statement but you do not recognize it, report it to the bank immediately. Provide the transaction date, amount, and reference number, and follow the bank's official dispute process.
+If your bank statement shows a cash withdrawal that you did not make or do not recognize, treat it as a potentially unauthorized transaction. This is different from an ATM withdrawal where cash was not dispensed or a transaction is still pending. Report the unrecognized withdrawal to the bank immediately. Provide the transaction date, amount, and reference number, and follow the bank's official dispute process.
