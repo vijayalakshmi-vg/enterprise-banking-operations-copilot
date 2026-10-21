@@ -14,6 +14,6 @@ FAQ 4: International Transaction Fees
 
 International card transactions may incur foreign transaction fees or currency conversion charges depending on the bank's terms and the card product. Check the applicable fee schedule for the specific card.
 
-FAQ 5: Unrecognized or Unauthorized Cash Withdrawal
+FAQ 5: Unrecognized or Suspicious Cash Withdrawal
 
-If your bank statement shows a cash withdrawal that you did not make or do not recognize, treat it as a potentially unauthorized transaction. This is different from an ATM withdrawal where cash was not dispensed or a transaction is still pending. Report the unrecognized withdrawal to the bank immediately. Provide the transaction date, amount, and reference number, and follow the bank's official dispute process.
+If you notice a suspicious, unfamiliar, or unrecognized cash withdrawal on your bank statement, and you do not remember making or authorizing it, treat it as a potentially unauthorized transaction. Report the suspicious withdrawal to the bank immediately. Provide the transaction date, amount, and reference number, and follow the bank's official dispute process.
