@@ -1,5 +1,8 @@
-
+import sys
 from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 
 docs = Path(r"C:\Users\14694\OneDrive\Documents\Projects\Enterprise_Banking_Operations_Copilot\document_engineering")
 
@@ -48,7 +51,7 @@ for line in contents.splitlines():
         if paragraph:
             parsed_data.append({
                 "document_title": document_title,
-                "section": current_section,
+                "section": current_section, 
                 "subsection": current_subsection,
                 "sub_subsection": current_sub_subsection,
                 "content": " ".join(paragraph)
@@ -104,3 +107,14 @@ print("\nTotal parsed records:", len(parsed_data))
 print("\nFirst 3 parsed records:")
 for item in parsed_data[:3]:
     print(item)
+
+
+from cleaning.clean_text import clean_records
+
+cleaned_data = clean_records(parsed_data)
+
+print("Original records:", len(parsed_data))
+print("Cleaned records:", len(cleaned_data))
+
+print("\nFirst cleaned record:")
+print(cleaned_data[0])
