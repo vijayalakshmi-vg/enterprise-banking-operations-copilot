@@ -1,0 +1,43 @@
+
+[
+  {
+    "document_id": "POL-CIM-001",
+    "description": "Customer information management, maintaining customer details, updating residential addresses, identity verification for information changes, and required supporting documents."
+  },
+  {
+    "document_id": "POL-FTO-002",
+    "description": "Processing internal and external funds transfers, transfer eligibility, available balances, transaction status, failed transfers, and reversals."
+  },
+  {
+    "document_id": "POL-CARD-003",
+    "description": "Debit card operations, card issuance, activation, PIN management, lost or stolen card reporting, card blocking, replacement, and transaction restrictions."
+  },
+  {
+    "document_id": "POL-SEC-004",
+    "description": "Account security and fraud prevention, unauthorized transaction reporting, suspicious activity, customer security, and fraud-related procedures."
+  },
+  {
+    "document_id": "POL-KYC-005",
+    "description": "Opening new personal banking accounts, customer eligibility, required applicant information, identity verification, supporting documents, KYC checks, and account approval."
+  },
+  {
+    "document_id": "POL-LOAN-006",
+    "description": "Loan application procedures, applicant eligibility, lending assessments, required application information, identity verification, and loan operations."
+  },
+  {
+    "document_id": "POL-FEE-007",
+    "description": "Banking fees and charges, applicable service fees, fee assessment, customer charges, and fee-related operational procedures."
+  },
+  {
+    "document_id": "POL-DIS-008",
+    "description": "Customer transaction disputes, unauthorized transactions, dispute classification, investigation, supporting evidence, and chargeback procedures."
+  },
+  {
+    "document_id": "POL-COM-009",
+    "description": "Customer complaints, complaint submission, classification, investigation, resolution, escalation, and customer communication."
+  },
+  {
+    "document_id": "POL-ACD-010",
+    "description": "Account closure, dormant and inactive account classification, account restrictions, reactivation, and account closure procedures."
+  }
+]
