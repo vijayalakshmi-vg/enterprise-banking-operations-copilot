@@ -18,11 +18,11 @@ DB_PATH = Path(__file__).resolve().parents[1] / "output" / "chroma_db"
 chroma_client = chromadb.PersistentClient(path=str(DB_PATH))
 
 collection = chroma_client.get_collection(
-    name="banking_policies"
+    name="banking_policies_v4"
 )
 
 
-def retrieve_documents(question, top_k=3):
+def retrieve_documents(question,selected_policy_ids, top_k=5):
 
     # Convert user question into an embedding
     response = client.models.embed_content(
@@ -33,12 +33,21 @@ def retrieve_documents(question, top_k=3):
     query_embedding = response.embeddings[0].values
 
     # Retrieve similar chunks from ChromaDB
+    where_filter = {
+        "document_id": {
+            "$in": selected_policy_ids
+        }
+    }
     results = collection.query(
         query_embeddings=[query_embedding],
         n_results=top_k,
-        include=["documents", "metadatas", "distances"]
+        where=where_filter,
+        include=[
+            "documents",
+            "metadatas",
+            "distances"
+        ]
     )
-
     print("\nUser Question:")
     print(question)
 
@@ -51,8 +60,13 @@ def retrieve_documents(question, top_k=3):
         print("Cosine Distance:", results["distances"][0][i])
 
 
+
 if __name__ == "__main__":
 
-    question = "How can I block my debit card if it is stolen?"
-
-    retrieve_documents(question, top_k=3)
+    questions = [
+        "What identity verification, applicant eligibility, and supporting document checks must be completed before opening a new bank account?",
+    ]
+    selected_policy_ids = ["POL-KYC-005"]
+    for question in questions:
+        print("\n" + "=" * 70)
+        retrieve_documents(question,selected_policy_ids,top_k=5)

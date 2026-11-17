@@ -5,6 +5,7 @@ from pathlib import Path
 import chromadb
 from dotenv import load_dotenv
 from google import genai
+from document_engineering.retrieval.retrieve_documents import retrieve_documents
 
 
 # ==========================================
@@ -128,6 +129,7 @@ def route_question(question, top_k=3):
     )
 
     query_embedding = generate_query_embedding(question)
+   
 
     results = collection.query(
         query_embeddings=[query_embedding],
@@ -197,8 +199,6 @@ def select_relevant_policies(results, threshold=0.70):
         })
 
     return selected_policies
-
-
 
 # ==========================================
 # 7. POLICY ROUTING TEST DATASET
@@ -294,6 +294,18 @@ def evaluate_policy_router():
         selected_policies = select_relevant_policies(
             results,
             threshold=0.70
+        )
+        selected_policy_ids = [
+            policy["document_id"]
+            for policy in selected_policies
+        ]
+
+        print("\nSelected Policy IDs:", selected_policy_ids)
+
+        retrieved_chunks = retrieve_documents(
+            question,
+            selected_policy_ids,
+            top_k=5
         )
 
         selected_ids = [
